@@ -35,6 +35,26 @@ var MollymageSolver = module.exports = {
 
     // TODO your code here
 
-    return Direction.ACT;
+    var coordinates = board.getHero();
+    var heroX = coordinates.x;
+    var heroY = coordinates.y;
+
+    var toDirection = '';
+    var toAct = Direction.ACT;
+
+    // var potionAround = board.getPotions();
+    // if (potionAround.length == 0) toAct = Direction.ACT;
+
+    var goalX = Math.floor(Math.random() * 22);
+    var goalY = Math.floor(Math.random() * 22);
+
+    if ((goalX - heroX > 0) && !board.isBarrierAt(heroX + 1, heroY)) toDirection = Direction.RIGHT;
+      else if ((goalX - heroX < 0) && !board.isBarrierAt(heroX - 1, heroY)) toDirection = Direction.LEFT;
+      else if ((goalY - heroY > 0) && !board.isBarrierAt(heroX, heroY + 1)) toDirection = Direction.UP;
+      else if ((goalY - heroY < 0) && !board.isBarrierAt(heroX, heroY - 1)) toDirection = Direction.DOWN;
+
+
+    if (toAct != '') return [toAct, toDirection];
+      else return toDirection;
   },
 };
